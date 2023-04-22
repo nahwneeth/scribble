@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:scribble/src/model/sketch/sketch.dart';
 import 'package:scribble/src/scribble.notifier.dart';
 import 'package:scribble/src/scribble_editing_painter.dart';
 import 'package:scribble/src/scribble_painter.dart';
@@ -59,7 +60,7 @@ class _ScribbleState extends State<Scribble> {
               key: widget.notifier.repaintBoundaryKey,
               child: CustomPaint(
                 painter: ScribblePainter(
-                  sketch: state.sketch,
+                  sketch: state.settledSketch,
                   scaleFactor: state.scaleFactor,
                 ),
               ),

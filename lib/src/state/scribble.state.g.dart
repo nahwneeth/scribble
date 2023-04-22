@@ -7,7 +7,8 @@ part of 'scribble.state.dart';
 // **************************************************************************
 
 _$Drawing _$$DrawingFromJson(Map<String, dynamic> json) => _$Drawing(
-      sketch: Sketch.fromJson(json['sketch'] as Map<String, dynamic>),
+      layer: Layer.fromJson(json['layer'] as Map<String, dynamic>),
+      selectedSketchIndex: json['selectedSketchIndex'] as int?,
       activeLine: json['activeLine'] == null
           ? null
           : SketchLine.fromJson(json['activeLine'] as Map<String, dynamic>),
@@ -28,10 +29,11 @@ _$Drawing _$$DrawingFromJson(Map<String, dynamic> json) => _$Drawing(
     );
 
 Map<String, dynamic> _$$DrawingToJson(_$Drawing instance) => <String, dynamic>{
-      'sketch': instance.sketch.toJson(),
+      'layer': instance.layer.toJson(),
+      'selectedSketchIndex': instance.selectedSketchIndex,
       'activeLine': instance.activeLine?.toJson(),
       'allowedPointersMode':
-          _$ScribblePointerModeEnumMap[instance.allowedPointersMode],
+          _$ScribblePointerModeEnumMap[instance.allowedPointersMode]!,
       'activePointerIds': instance.activePointerIds,
       'pointerPosition': instance.pointerPosition?.toJson(),
       'selectedColor': instance.selectedColor,
@@ -48,7 +50,8 @@ const _$ScribblePointerModeEnumMap = {
 };
 
 _$Erasing _$$ErasingFromJson(Map<String, dynamic> json) => _$Erasing(
-      sketch: Sketch.fromJson(json['sketch'] as Map<String, dynamic>),
+      layer: Layer.fromJson(json['layer'] as Map<String, dynamic>),
+      selectedSketchIndex: json['selectedSketchIndex'] as int?,
       allowedPointersMode: $enumDecodeNullable(
               _$ScribblePointerModeEnumMap, json['allowedPointersMode']) ??
           ScribblePointerMode.all,
@@ -65,9 +68,10 @@ _$Erasing _$$ErasingFromJson(Map<String, dynamic> json) => _$Erasing(
     );
 
 Map<String, dynamic> _$$ErasingToJson(_$Erasing instance) => <String, dynamic>{
-      'sketch': instance.sketch.toJson(),
+      'layer': instance.layer.toJson(),
+      'selectedSketchIndex': instance.selectedSketchIndex,
       'allowedPointersMode':
-          _$ScribblePointerModeEnumMap[instance.allowedPointersMode],
+          _$ScribblePointerModeEnumMap[instance.allowedPointersMode]!,
       'activePointerIds': instance.activePointerIds,
       'pointerPosition': instance.pointerPosition?.toJson(),
       'selectedWidth': instance.selectedWidth,

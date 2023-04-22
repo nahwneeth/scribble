@@ -51,31 +51,48 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => _saveImage(context),
         ),
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 2,
-          child: Stack(
-            children: [
-              Scribble(
-                notifier: notifier,
-                drawPen: true,
-              ),
-              Positioned(
-                top: 16,
-                right: 16,
-                child: Column(
-                  children: [
-                    _buildColorToolbar(context),
-                    const Divider(
-                      height: 32,
-                    ),
-                    _buildStrokeToolbar(context),
-                  ],
-                ),
-              )
-            ],
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            flex: 1,
+            child: StateNotifierBuilder<ScribbleState>(
+              stateNotifier: notifier,
+              builder: (context, value, _) {
+                return LayersPane(
+                  onAddLayer: notifier.addLayer,
+                  count: value.layer.sketches.length,
+                  onSelected: notifier.selectSketch,
+                  selectedIndex: value.selectedSketchIndex,
+                );
+              },
+            ),
           ),
-        ),
+          Expanded(
+            flex: 2,
+            child: Stack(
+              children: [
+                Scribble(
+                  notifier: notifier,
+                  drawPen: true,
+                ),
+                Positioned(
+                  top: 16,
+                  right: 16,
+                  child: Column(
+                    children: [
+                      _buildColorToolbar(context),
+                      const Divider(
+                        height: 32,
+                      ),
+                      _buildStrokeToolbar(context),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -278,6 +295,53 @@ class _HomePageState extends State<HomePage> {
       disabledElevation: 0,
       backgroundColor: Colors.blueGrey,
       child: const Icon(Icons.clear),
+    );
+  }
+}
+
+class LayersPane extends StatelessWidget {
+  const LayersPane({
+    Key? key,
+    required this.onAddLayer,
+    required this.selectedIndex,
+    required this.onSelected,
+    required this.count,
+  }) : super(key: key);
+
+  final VoidCallback onAddLayer;
+  final int? selectedIndex;
+  final void Function(int) onSelected;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.grey.shade200,
+      child: Column(
+        children: [
+          const SizedBox(height: 4),
+          OutlinedButton.icon(
+            onPressed: onAddLayer,
+            icon: const Icon(Icons.add),
+            label: const Text("Add Layer"),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(6),
+              itemCount: count,
+              itemBuilder: (context, i) {
+                return Card(
+                  color: selectedIndex == i ? Colors.amber : null,
+                  child: ListTile(
+                    title: Text("Layer #$i"),
+                    onTap: () => onSelected(i),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

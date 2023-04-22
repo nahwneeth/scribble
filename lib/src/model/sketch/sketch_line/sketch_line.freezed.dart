@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'sketch_line.dart';
 
@@ -34,38 +34,42 @@ mixin _$SketchLine {
 abstract class $SketchLineCopyWith<$Res> {
   factory $SketchLineCopyWith(
           SketchLine value, $Res Function(SketchLine) then) =
-      _$SketchLineCopyWithImpl<$Res>;
+      _$SketchLineCopyWithImpl<$Res, SketchLine>;
+  @useResult
   $Res call({List<Point> points, int color, double width});
 }
 
 /// @nodoc
-class _$SketchLineCopyWithImpl<$Res> implements $SketchLineCopyWith<$Res> {
+class _$SketchLineCopyWithImpl<$Res, $Val extends SketchLine>
+    implements $SketchLineCopyWith<$Res> {
   _$SketchLineCopyWithImpl(this._value, this._then);
 
-  final SketchLine _value;
   // ignore: unused_field
-  final $Res Function(SketchLine) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? points = freezed,
-    Object? color = freezed,
-    Object? width = freezed,
+    Object? points = null,
+    Object? color = null,
+    Object? width = null,
   }) {
     return _then(_value.copyWith(
-      points: points == freezed
+      points: null == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as List<Point>,
-      color: color == freezed
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as int,
-      width: width == freezed
+      width: null == width
           ? _value.width
           : width // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -76,35 +80,35 @@ abstract class _$$_SketchLineCopyWith<$Res>
           _$_SketchLine value, $Res Function(_$_SketchLine) then) =
       __$$_SketchLineCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<Point> points, int color, double width});
 }
 
 /// @nodoc
-class __$$_SketchLineCopyWithImpl<$Res> extends _$SketchLineCopyWithImpl<$Res>
+class __$$_SketchLineCopyWithImpl<$Res>
+    extends _$SketchLineCopyWithImpl<$Res, _$_SketchLine>
     implements _$$_SketchLineCopyWith<$Res> {
   __$$_SketchLineCopyWithImpl(
       _$_SketchLine _value, $Res Function(_$_SketchLine) _then)
-      : super(_value, (v) => _then(v as _$_SketchLine));
+      : super(_value, _then);
 
-  @override
-  _$_SketchLine get _value => super._value as _$_SketchLine;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? points = freezed,
-    Object? color = freezed,
-    Object? width = freezed,
+    Object? points = null,
+    Object? color = null,
+    Object? width = null,
   }) {
     return _then(_$_SketchLine(
-      points: points == freezed
+      points: null == points
           ? _value._points
           : points // ignore: cast_nullable_to_non_nullable
               as List<Point>,
-      color: color == freezed
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as int,
-      width: width == freezed
+      width: null == width
           ? _value.width
           : width // ignore: cast_nullable_to_non_nullable
               as double,
@@ -127,6 +131,7 @@ class _$_SketchLine implements _SketchLine {
   final List<Point> _points;
   @override
   List<Point> get points {
+    if (_points is EqualUnmodifiableListView) return _points;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_points);
   }
@@ -147,26 +152,26 @@ class _$_SketchLine implements _SketchLine {
         (other.runtimeType == runtimeType &&
             other is _$_SketchLine &&
             const DeepCollectionEquality().equals(other._points, _points) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality().equals(other.width, width));
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.width, width) || other.width == width));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_points),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(width));
+      runtimeType, const DeepCollectionEquality().hash(_points), color, width);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SketchLineCopyWith<_$_SketchLine> get copyWith =>
       __$$_SketchLineCopyWithImpl<_$_SketchLine>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SketchLineToJson(this);
+    return _$$_SketchLineToJson(
+      this,
+    );
   }
 }
 
@@ -180,11 +185,11 @@ abstract class _SketchLine implements SketchLine {
       _$_SketchLine.fromJson;
 
   @override
-  List<Point> get points => throw _privateConstructorUsedError;
+  List<Point> get points;
   @override
-  int get color => throw _privateConstructorUsedError;
+  int get color;
   @override
-  double get width => throw _privateConstructorUsedError;
+  double get width;
   @override
   @JsonKey(ignore: true)
   _$$_SketchLineCopyWith<_$_SketchLine> get copyWith =>

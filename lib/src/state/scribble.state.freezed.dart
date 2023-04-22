@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'scribble.state.dart';
 
@@ -29,8 +29,8 @@ ScribbleState _$ScribbleStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScribbleState {
-  /// The current state of the sketch
-  Sketch get sketch => throw _privateConstructorUsedError;
+  Layer get layer => throw _privateConstructorUsedError;
+  int? get selectedSketchIndex => throw _privateConstructorUsedError;
 
   /// Which pointers are allowed for drawing and will be captured by the
   /// scribble widget.
@@ -55,7 +55,8 @@ mixin _$ScribbleState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -65,7 +66,8 @@ mixin _$ScribbleState {
             double scaleFactor)
         drawing,
     required TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -76,8 +78,9 @@ mixin _$ScribbleState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            Sketch sketch,
+    TResult? Function(
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -86,8 +89,9 @@ mixin _$ScribbleState {
             double selectedWidth,
             double scaleFactor)?
         drawing,
-    TResult Function(
-            Sketch sketch,
+    TResult? Function(
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -99,7 +103,8 @@ mixin _$ScribbleState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -109,7 +114,8 @@ mixin _$ScribbleState {
             double scaleFactor)?
         drawing,
     TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -127,8 +133,8 @@ mixin _$ScribbleState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Drawing value)? drawing,
-    TResult Function(Erasing value)? erasing,
+    TResult? Function(Drawing value)? drawing,
+    TResult? Function(Erasing value)? erasing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -148,80 +154,91 @@ mixin _$ScribbleState {
 abstract class $ScribbleStateCopyWith<$Res> {
   factory $ScribbleStateCopyWith(
           ScribbleState value, $Res Function(ScribbleState) then) =
-      _$ScribbleStateCopyWithImpl<$Res>;
+      _$ScribbleStateCopyWithImpl<$Res, ScribbleState>;
+  @useResult
   $Res call(
-      {Sketch sketch,
+      {Layer layer,
+      int? selectedSketchIndex,
       ScribblePointerMode allowedPointersMode,
       List<int> activePointerIds,
       Point? pointerPosition,
       double selectedWidth,
       double scaleFactor});
 
-  $SketchCopyWith<$Res> get sketch;
+  $LayerCopyWith<$Res> get layer;
   $PointCopyWith<$Res>? get pointerPosition;
 }
 
 /// @nodoc
-class _$ScribbleStateCopyWithImpl<$Res>
+class _$ScribbleStateCopyWithImpl<$Res, $Val extends ScribbleState>
     implements $ScribbleStateCopyWith<$Res> {
   _$ScribbleStateCopyWithImpl(this._value, this._then);
 
-  final ScribbleState _value;
   // ignore: unused_field
-  final $Res Function(ScribbleState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sketch = freezed,
-    Object? allowedPointersMode = freezed,
-    Object? activePointerIds = freezed,
+    Object? layer = null,
+    Object? selectedSketchIndex = freezed,
+    Object? allowedPointersMode = null,
+    Object? activePointerIds = null,
     Object? pointerPosition = freezed,
-    Object? selectedWidth = freezed,
-    Object? scaleFactor = freezed,
+    Object? selectedWidth = null,
+    Object? scaleFactor = null,
   }) {
     return _then(_value.copyWith(
-      sketch: sketch == freezed
-          ? _value.sketch
-          : sketch // ignore: cast_nullable_to_non_nullable
-              as Sketch,
-      allowedPointersMode: allowedPointersMode == freezed
+      layer: null == layer
+          ? _value.layer
+          : layer // ignore: cast_nullable_to_non_nullable
+              as Layer,
+      selectedSketchIndex: freezed == selectedSketchIndex
+          ? _value.selectedSketchIndex
+          : selectedSketchIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      allowedPointersMode: null == allowedPointersMode
           ? _value.allowedPointersMode
           : allowedPointersMode // ignore: cast_nullable_to_non_nullable
               as ScribblePointerMode,
-      activePointerIds: activePointerIds == freezed
+      activePointerIds: null == activePointerIds
           ? _value.activePointerIds
           : activePointerIds // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      pointerPosition: pointerPosition == freezed
+      pointerPosition: freezed == pointerPosition
           ? _value.pointerPosition
           : pointerPosition // ignore: cast_nullable_to_non_nullable
               as Point?,
-      selectedWidth: selectedWidth == freezed
+      selectedWidth: null == selectedWidth
           ? _value.selectedWidth
           : selectedWidth // ignore: cast_nullable_to_non_nullable
               as double,
-      scaleFactor: scaleFactor == freezed
+      scaleFactor: null == scaleFactor
           ? _value.scaleFactor
           : scaleFactor // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 
   @override
-  $SketchCopyWith<$Res> get sketch {
-    return $SketchCopyWith<$Res>(_value.sketch, (value) {
-      return _then(_value.copyWith(sketch: value));
+  @pragma('vm:prefer-inline')
+  $LayerCopyWith<$Res> get layer {
+    return $LayerCopyWith<$Res>(_value.layer, (value) {
+      return _then(_value.copyWith(layer: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PointCopyWith<$Res>? get pointerPosition {
     if (_value.pointerPosition == null) {
       return null;
     }
 
     return $PointCopyWith<$Res>(_value.pointerPosition!, (value) {
-      return _then(_value.copyWith(pointerPosition: value));
+      return _then(_value.copyWith(pointerPosition: value) as $Val);
     });
   }
 }
@@ -232,8 +249,10 @@ abstract class _$$DrawingCopyWith<$Res>
   factory _$$DrawingCopyWith(_$Drawing value, $Res Function(_$Drawing) then) =
       __$$DrawingCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {Sketch sketch,
+      {Layer layer,
+      int? selectedSketchIndex,
       SketchLine? activeLine,
       ScribblePointerMode allowedPointersMode,
       List<int> activePointerIds,
@@ -243,62 +262,66 @@ abstract class _$$DrawingCopyWith<$Res>
       double scaleFactor});
 
   @override
-  $SketchCopyWith<$Res> get sketch;
+  $LayerCopyWith<$Res> get layer;
   $SketchLineCopyWith<$Res>? get activeLine;
   @override
   $PointCopyWith<$Res>? get pointerPosition;
 }
 
 /// @nodoc
-class __$$DrawingCopyWithImpl<$Res> extends _$ScribbleStateCopyWithImpl<$Res>
+class __$$DrawingCopyWithImpl<$Res>
+    extends _$ScribbleStateCopyWithImpl<$Res, _$Drawing>
     implements _$$DrawingCopyWith<$Res> {
   __$$DrawingCopyWithImpl(_$Drawing _value, $Res Function(_$Drawing) _then)
-      : super(_value, (v) => _then(v as _$Drawing));
+      : super(_value, _then);
 
-  @override
-  _$Drawing get _value => super._value as _$Drawing;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sketch = freezed,
+    Object? layer = null,
+    Object? selectedSketchIndex = freezed,
     Object? activeLine = freezed,
-    Object? allowedPointersMode = freezed,
-    Object? activePointerIds = freezed,
+    Object? allowedPointersMode = null,
+    Object? activePointerIds = null,
     Object? pointerPosition = freezed,
-    Object? selectedColor = freezed,
-    Object? selectedWidth = freezed,
-    Object? scaleFactor = freezed,
+    Object? selectedColor = null,
+    Object? selectedWidth = null,
+    Object? scaleFactor = null,
   }) {
     return _then(_$Drawing(
-      sketch: sketch == freezed
-          ? _value.sketch
-          : sketch // ignore: cast_nullable_to_non_nullable
-              as Sketch,
-      activeLine: activeLine == freezed
+      layer: null == layer
+          ? _value.layer
+          : layer // ignore: cast_nullable_to_non_nullable
+              as Layer,
+      selectedSketchIndex: freezed == selectedSketchIndex
+          ? _value.selectedSketchIndex
+          : selectedSketchIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      activeLine: freezed == activeLine
           ? _value.activeLine
           : activeLine // ignore: cast_nullable_to_non_nullable
               as SketchLine?,
-      allowedPointersMode: allowedPointersMode == freezed
+      allowedPointersMode: null == allowedPointersMode
           ? _value.allowedPointersMode
           : allowedPointersMode // ignore: cast_nullable_to_non_nullable
               as ScribblePointerMode,
-      activePointerIds: activePointerIds == freezed
+      activePointerIds: null == activePointerIds
           ? _value._activePointerIds
           : activePointerIds // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      pointerPosition: pointerPosition == freezed
+      pointerPosition: freezed == pointerPosition
           ? _value.pointerPosition
           : pointerPosition // ignore: cast_nullable_to_non_nullable
               as Point?,
-      selectedColor: selectedColor == freezed
+      selectedColor: null == selectedColor
           ? _value.selectedColor
           : selectedColor // ignore: cast_nullable_to_non_nullable
               as int,
-      selectedWidth: selectedWidth == freezed
+      selectedWidth: null == selectedWidth
           ? _value.selectedWidth
           : selectedWidth // ignore: cast_nullable_to_non_nullable
               as double,
-      scaleFactor: scaleFactor == freezed
+      scaleFactor: null == scaleFactor
           ? _value.scaleFactor
           : scaleFactor // ignore: cast_nullable_to_non_nullable
               as double,
@@ -306,6 +329,7 @@ class __$$DrawingCopyWithImpl<$Res> extends _$ScribbleStateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SketchLineCopyWith<$Res>? get activeLine {
     if (_value.activeLine == null) {
       return null;
@@ -321,7 +345,8 @@ class __$$DrawingCopyWithImpl<$Res> extends _$ScribbleStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$Drawing extends Drawing {
   const _$Drawing(
-      {required this.sketch,
+      {required this.layer,
+      required this.selectedSketchIndex,
       this.activeLine,
       this.allowedPointersMode = ScribblePointerMode.all,
       final List<int> activePointerIds = const [],
@@ -337,9 +362,10 @@ class _$Drawing extends Drawing {
   factory _$Drawing.fromJson(Map<String, dynamic> json) =>
       _$$DrawingFromJson(json);
 
-  /// The current state of the sketch
   @override
-  final Sketch sketch;
+  final Layer layer;
+  @override
+  final int? selectedSketchIndex;
 
   /// The line that is currently being drawn
   @override
@@ -360,6 +386,8 @@ class _$Drawing extends Drawing {
   @override
   @JsonKey()
   List<int> get activePointerIds {
+    if (_activePointerIds is EqualUnmodifiableListView)
+      return _activePointerIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_activePointerIds);
   }
@@ -391,7 +419,7 @@ class _$Drawing extends Drawing {
 
   @override
   String toString() {
-    return 'ScribbleState.drawing(sketch: $sketch, activeLine: $activeLine, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedColor: $selectedColor, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor)';
+    return 'ScribbleState.drawing(layer: $layer, selectedSketchIndex: $selectedSketchIndex, activeLine: $activeLine, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedColor: $selectedColor, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor)';
   }
 
   @override
@@ -399,38 +427,42 @@ class _$Drawing extends Drawing {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Drawing &&
-            const DeepCollectionEquality().equals(other.sketch, sketch) &&
-            const DeepCollectionEquality()
-                .equals(other.activeLine, activeLine) &&
-            const DeepCollectionEquality()
-                .equals(other.allowedPointersMode, allowedPointersMode) &&
+            (identical(other.layer, layer) || other.layer == layer) &&
+            (identical(other.selectedSketchIndex, selectedSketchIndex) ||
+                other.selectedSketchIndex == selectedSketchIndex) &&
+            (identical(other.activeLine, activeLine) ||
+                other.activeLine == activeLine) &&
+            (identical(other.allowedPointersMode, allowedPointersMode) ||
+                other.allowedPointersMode == allowedPointersMode) &&
             const DeepCollectionEquality()
                 .equals(other._activePointerIds, _activePointerIds) &&
-            const DeepCollectionEquality()
-                .equals(other.pointerPosition, pointerPosition) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedColor, selectedColor) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedWidth, selectedWidth) &&
-            const DeepCollectionEquality()
-                .equals(other.scaleFactor, scaleFactor));
+            (identical(other.pointerPosition, pointerPosition) ||
+                other.pointerPosition == pointerPosition) &&
+            (identical(other.selectedColor, selectedColor) ||
+                other.selectedColor == selectedColor) &&
+            (identical(other.selectedWidth, selectedWidth) ||
+                other.selectedWidth == selectedWidth) &&
+            (identical(other.scaleFactor, scaleFactor) ||
+                other.scaleFactor == scaleFactor));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(sketch),
-      const DeepCollectionEquality().hash(activeLine),
-      const DeepCollectionEquality().hash(allowedPointersMode),
+      layer,
+      selectedSketchIndex,
+      activeLine,
+      allowedPointersMode,
       const DeepCollectionEquality().hash(_activePointerIds),
-      const DeepCollectionEquality().hash(pointerPosition),
-      const DeepCollectionEquality().hash(selectedColor),
-      const DeepCollectionEquality().hash(selectedWidth),
-      const DeepCollectionEquality().hash(scaleFactor));
+      pointerPosition,
+      selectedColor,
+      selectedWidth,
+      scaleFactor);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$DrawingCopyWith<_$Drawing> get copyWith =>
       __$$DrawingCopyWithImpl<_$Drawing>(this, _$identity);
 
@@ -438,7 +470,8 @@ class _$Drawing extends Drawing {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -448,7 +481,8 @@ class _$Drawing extends Drawing {
             double scaleFactor)
         drawing,
     required TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -456,15 +490,24 @@ class _$Drawing extends Drawing {
             double scaleFactor)
         erasing,
   }) {
-    return drawing(sketch, activeLine, allowedPointersMode, activePointerIds,
-        pointerPosition, selectedColor, selectedWidth, scaleFactor);
+    return drawing(
+        layer,
+        selectedSketchIndex,
+        activeLine,
+        allowedPointersMode,
+        activePointerIds,
+        pointerPosition,
+        selectedColor,
+        selectedWidth,
+        scaleFactor);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            Sketch sketch,
+    TResult? Function(
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -473,8 +516,9 @@ class _$Drawing extends Drawing {
             double selectedWidth,
             double scaleFactor)?
         drawing,
-    TResult Function(
-            Sketch sketch,
+    TResult? Function(
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -483,7 +527,8 @@ class _$Drawing extends Drawing {
         erasing,
   }) {
     return drawing?.call(
-        sketch,
+        layer,
+        selectedSketchIndex,
         activeLine,
         allowedPointersMode,
         activePointerIds,
@@ -497,7 +542,8 @@ class _$Drawing extends Drawing {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -507,7 +553,8 @@ class _$Drawing extends Drawing {
             double scaleFactor)?
         drawing,
     TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -517,8 +564,16 @@ class _$Drawing extends Drawing {
     required TResult orElse(),
   }) {
     if (drawing != null) {
-      return drawing(sketch, activeLine, allowedPointersMode, activePointerIds,
-          pointerPosition, selectedColor, selectedWidth, scaleFactor);
+      return drawing(
+          layer,
+          selectedSketchIndex,
+          activeLine,
+          allowedPointersMode,
+          activePointerIds,
+          pointerPosition,
+          selectedColor,
+          selectedWidth,
+          scaleFactor);
     }
     return orElse();
   }
@@ -535,8 +590,8 @@ class _$Drawing extends Drawing {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Drawing value)? drawing,
-    TResult Function(Erasing value)? erasing,
+    TResult? Function(Drawing value)? drawing,
+    TResult? Function(Erasing value)? erasing,
   }) {
     return drawing?.call(this);
   }
@@ -556,13 +611,16 @@ class _$Drawing extends Drawing {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DrawingToJson(this);
+    return _$$DrawingToJson(
+      this,
+    );
   }
 }
 
 abstract class Drawing extends ScribbleState {
   const factory Drawing(
-      {required final Sketch sketch,
+      {required final Layer layer,
+      required final int? selectedSketchIndex,
       final SketchLine? activeLine,
       final ScribblePointerMode allowedPointersMode,
       final List<int> activePointerIds,
@@ -575,41 +633,40 @@ abstract class Drawing extends ScribbleState {
   factory Drawing.fromJson(Map<String, dynamic> json) = _$Drawing.fromJson;
 
   @override
-
-  /// The current state of the sketch
-  Sketch get sketch => throw _privateConstructorUsedError;
+  Layer get layer;
+  @override
+  int? get selectedSketchIndex;
 
   /// The line that is currently being drawn
-  SketchLine? get activeLine => throw _privateConstructorUsedError;
+  SketchLine? get activeLine;
   @override
 
   /// Which pointers are allowed for drawing and will be captured by the
   /// scribble widget.
-  ScribblePointerMode get allowedPointersMode =>
-      throw _privateConstructorUsedError;
+  ScribblePointerMode get allowedPointersMode;
   @override
 
   /// The ids of all supported pointers that are currently interacting with
   /// the widget.
-  List<int> get activePointerIds => throw _privateConstructorUsedError;
+  List<int> get activePointerIds;
   @override
 
   /// The current position of the pointer
-  Point? get pointerPosition => throw _privateConstructorUsedError;
+  Point? get pointerPosition;
 
   /// The color that is currently being drawn with
-  int get selectedColor => throw _privateConstructorUsedError;
+  int get selectedColor;
   @override
 
   /// The current width of the pen
-  double get selectedWidth => throw _privateConstructorUsedError;
+  double get selectedWidth;
   @override
 
   /// How much the widget is scaled at the moment.
   ///
   /// Can be used if zoom functionality is needed
   /// (e.g. through InteractiveViewer) so that the pen width remains the same.
-  double get scaleFactor => throw _privateConstructorUsedError;
+  double get scaleFactor;
   @override
   @JsonKey(ignore: true)
   _$$DrawingCopyWith<_$Drawing> get copyWith =>
@@ -622,8 +679,10 @@ abstract class _$$ErasingCopyWith<$Res>
   factory _$$ErasingCopyWith(_$Erasing value, $Res Function(_$Erasing) then) =
       __$$ErasingCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {Sketch sketch,
+      {Layer layer,
+      int? selectedSketchIndex,
       ScribblePointerMode allowedPointersMode,
       List<int> activePointerIds,
       Point? pointerPosition,
@@ -631,51 +690,55 @@ abstract class _$$ErasingCopyWith<$Res>
       double scaleFactor});
 
   @override
-  $SketchCopyWith<$Res> get sketch;
+  $LayerCopyWith<$Res> get layer;
   @override
   $PointCopyWith<$Res>? get pointerPosition;
 }
 
 /// @nodoc
-class __$$ErasingCopyWithImpl<$Res> extends _$ScribbleStateCopyWithImpl<$Res>
+class __$$ErasingCopyWithImpl<$Res>
+    extends _$ScribbleStateCopyWithImpl<$Res, _$Erasing>
     implements _$$ErasingCopyWith<$Res> {
   __$$ErasingCopyWithImpl(_$Erasing _value, $Res Function(_$Erasing) _then)
-      : super(_value, (v) => _then(v as _$Erasing));
+      : super(_value, _then);
 
-  @override
-  _$Erasing get _value => super._value as _$Erasing;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sketch = freezed,
-    Object? allowedPointersMode = freezed,
-    Object? activePointerIds = freezed,
+    Object? layer = null,
+    Object? selectedSketchIndex = freezed,
+    Object? allowedPointersMode = null,
+    Object? activePointerIds = null,
     Object? pointerPosition = freezed,
-    Object? selectedWidth = freezed,
-    Object? scaleFactor = freezed,
+    Object? selectedWidth = null,
+    Object? scaleFactor = null,
   }) {
     return _then(_$Erasing(
-      sketch: sketch == freezed
-          ? _value.sketch
-          : sketch // ignore: cast_nullable_to_non_nullable
-              as Sketch,
-      allowedPointersMode: allowedPointersMode == freezed
+      layer: null == layer
+          ? _value.layer
+          : layer // ignore: cast_nullable_to_non_nullable
+              as Layer,
+      selectedSketchIndex: freezed == selectedSketchIndex
+          ? _value.selectedSketchIndex
+          : selectedSketchIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      allowedPointersMode: null == allowedPointersMode
           ? _value.allowedPointersMode
           : allowedPointersMode // ignore: cast_nullable_to_non_nullable
               as ScribblePointerMode,
-      activePointerIds: activePointerIds == freezed
+      activePointerIds: null == activePointerIds
           ? _value._activePointerIds
           : activePointerIds // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      pointerPosition: pointerPosition == freezed
+      pointerPosition: freezed == pointerPosition
           ? _value.pointerPosition
           : pointerPosition // ignore: cast_nullable_to_non_nullable
               as Point?,
-      selectedWidth: selectedWidth == freezed
+      selectedWidth: null == selectedWidth
           ? _value.selectedWidth
           : selectedWidth // ignore: cast_nullable_to_non_nullable
               as double,
-      scaleFactor: scaleFactor == freezed
+      scaleFactor: null == scaleFactor
           ? _value.scaleFactor
           : scaleFactor // ignore: cast_nullable_to_non_nullable
               as double,
@@ -687,7 +750,8 @@ class __$$ErasingCopyWithImpl<$Res> extends _$ScribbleStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$Erasing extends Erasing {
   const _$Erasing(
-      {required this.sketch,
+      {required this.layer,
+      required this.selectedSketchIndex,
       this.allowedPointersMode = ScribblePointerMode.all,
       final List<int> activePointerIds = const [],
       this.pointerPosition,
@@ -701,9 +765,10 @@ class _$Erasing extends Erasing {
   factory _$Erasing.fromJson(Map<String, dynamic> json) =>
       _$$ErasingFromJson(json);
 
-  /// The current state of the sketch
   @override
-  final Sketch sketch;
+  final Layer layer;
+  @override
+  final int? selectedSketchIndex;
 
   /// Which pointers are allowed for drawing and will be captured by the
   /// scribble widget.
@@ -720,6 +785,8 @@ class _$Erasing extends Erasing {
   @override
   @JsonKey()
   List<int> get activePointerIds {
+    if (_activePointerIds is EqualUnmodifiableListView)
+      return _activePointerIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_activePointerIds);
   }
@@ -746,7 +813,7 @@ class _$Erasing extends Erasing {
 
   @override
   String toString() {
-    return 'ScribbleState.erasing(sketch: $sketch, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor)';
+    return 'ScribbleState.erasing(layer: $layer, selectedSketchIndex: $selectedSketchIndex, allowedPointersMode: $allowedPointersMode, activePointerIds: $activePointerIds, pointerPosition: $pointerPosition, selectedWidth: $selectedWidth, scaleFactor: $scaleFactor)';
   }
 
   @override
@@ -754,32 +821,36 @@ class _$Erasing extends Erasing {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Erasing &&
-            const DeepCollectionEquality().equals(other.sketch, sketch) &&
-            const DeepCollectionEquality()
-                .equals(other.allowedPointersMode, allowedPointersMode) &&
+            (identical(other.layer, layer) || other.layer == layer) &&
+            (identical(other.selectedSketchIndex, selectedSketchIndex) ||
+                other.selectedSketchIndex == selectedSketchIndex) &&
+            (identical(other.allowedPointersMode, allowedPointersMode) ||
+                other.allowedPointersMode == allowedPointersMode) &&
             const DeepCollectionEquality()
                 .equals(other._activePointerIds, _activePointerIds) &&
-            const DeepCollectionEquality()
-                .equals(other.pointerPosition, pointerPosition) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedWidth, selectedWidth) &&
-            const DeepCollectionEquality()
-                .equals(other.scaleFactor, scaleFactor));
+            (identical(other.pointerPosition, pointerPosition) ||
+                other.pointerPosition == pointerPosition) &&
+            (identical(other.selectedWidth, selectedWidth) ||
+                other.selectedWidth == selectedWidth) &&
+            (identical(other.scaleFactor, scaleFactor) ||
+                other.scaleFactor == scaleFactor));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(sketch),
-      const DeepCollectionEquality().hash(allowedPointersMode),
+      layer,
+      selectedSketchIndex,
+      allowedPointersMode,
       const DeepCollectionEquality().hash(_activePointerIds),
-      const DeepCollectionEquality().hash(pointerPosition),
-      const DeepCollectionEquality().hash(selectedWidth),
-      const DeepCollectionEquality().hash(scaleFactor));
+      pointerPosition,
+      selectedWidth,
+      scaleFactor);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ErasingCopyWith<_$Erasing> get copyWith =>
       __$$ErasingCopyWithImpl<_$Erasing>(this, _$identity);
 
@@ -787,7 +858,8 @@ class _$Erasing extends Erasing {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -797,7 +869,8 @@ class _$Erasing extends Erasing {
             double scaleFactor)
         drawing,
     required TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -805,15 +878,16 @@ class _$Erasing extends Erasing {
             double scaleFactor)
         erasing,
   }) {
-    return erasing(sketch, allowedPointersMode, activePointerIds,
-        pointerPosition, selectedWidth, scaleFactor);
+    return erasing(layer, selectedSketchIndex, allowedPointersMode,
+        activePointerIds, pointerPosition, selectedWidth, scaleFactor);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            Sketch sketch,
+    TResult? Function(
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -822,8 +896,9 @@ class _$Erasing extends Erasing {
             double selectedWidth,
             double scaleFactor)?
         drawing,
-    TResult Function(
-            Sketch sketch,
+    TResult? Function(
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -831,15 +906,16 @@ class _$Erasing extends Erasing {
             double scaleFactor)?
         erasing,
   }) {
-    return erasing?.call(sketch, allowedPointersMode, activePointerIds,
-        pointerPosition, selectedWidth, scaleFactor);
+    return erasing?.call(layer, selectedSketchIndex, allowedPointersMode,
+        activePointerIds, pointerPosition, selectedWidth, scaleFactor);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             SketchLine? activeLine,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
@@ -849,7 +925,8 @@ class _$Erasing extends Erasing {
             double scaleFactor)?
         drawing,
     TResult Function(
-            Sketch sketch,
+            Layer layer,
+            int? selectedSketchIndex,
             ScribblePointerMode allowedPointersMode,
             List<int> activePointerIds,
             Point? pointerPosition,
@@ -859,8 +936,8 @@ class _$Erasing extends Erasing {
     required TResult orElse(),
   }) {
     if (erasing != null) {
-      return erasing(sketch, allowedPointersMode, activePointerIds,
-          pointerPosition, selectedWidth, scaleFactor);
+      return erasing(layer, selectedSketchIndex, allowedPointersMode,
+          activePointerIds, pointerPosition, selectedWidth, scaleFactor);
     }
     return orElse();
   }
@@ -877,8 +954,8 @@ class _$Erasing extends Erasing {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Drawing value)? drawing,
-    TResult Function(Erasing value)? erasing,
+    TResult? Function(Drawing value)? drawing,
+    TResult? Function(Erasing value)? erasing,
   }) {
     return erasing?.call(this);
   }
@@ -898,13 +975,16 @@ class _$Erasing extends Erasing {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ErasingToJson(this);
+    return _$$ErasingToJson(
+      this,
+    );
   }
 }
 
 abstract class Erasing extends ScribbleState {
   const factory Erasing(
-      {required final Sketch sketch,
+      {required final Layer layer,
+      required final int? selectedSketchIndex,
       final ScribblePointerMode allowedPointersMode,
       final List<int> activePointerIds,
       final Point? pointerPosition,
@@ -915,35 +995,34 @@ abstract class Erasing extends ScribbleState {
   factory Erasing.fromJson(Map<String, dynamic> json) = _$Erasing.fromJson;
 
   @override
-
-  /// The current state of the sketch
-  Sketch get sketch => throw _privateConstructorUsedError;
+  Layer get layer;
+  @override
+  int? get selectedSketchIndex;
   @override
 
   /// Which pointers are allowed for drawing and will be captured by the
   /// scribble widget.
-  ScribblePointerMode get allowedPointersMode =>
-      throw _privateConstructorUsedError;
+  ScribblePointerMode get allowedPointersMode;
   @override
 
   /// The ids of all supported pointers that are currently interacting with
   /// the widget.
-  List<int> get activePointerIds => throw _privateConstructorUsedError;
+  List<int> get activePointerIds;
   @override
 
   /// The current position of the pointer
-  Point? get pointerPosition => throw _privateConstructorUsedError;
+  Point? get pointerPosition;
   @override
 
   /// The current width of the pen
-  double get selectedWidth => throw _privateConstructorUsedError;
+  double get selectedWidth;
   @override
 
   /// How much the widget is scaled at the moment.
   ///
   /// Can be used if zoom functionality is needed
   /// (e.g. through InteractiveViewer) so that the pen width remains the same.
-  double get scaleFactor => throw _privateConstructorUsedError;
+  double get scaleFactor;
   @override
   @JsonKey(ignore: true)
   _$$ErasingCopyWith<_$Erasing> get copyWith =>

@@ -1,14 +1,15 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/rendering.dart' hide Layer;
 import 'package:flutter/widgets.dart';
 import 'package:history_state_notifier/history_state_notifier.dart';
 import 'package:scribble/src/model/sketch/sketch.dart';
 import 'package:scribble/src/state/scribble.state.dart';
 import 'package:state_notifier/state_notifier.dart';
+
+import '../src/model/layer/layer.dart';
 
 abstract class ScribbleNotifierBase extends StateNotifier<ScribbleState> {
   ScribbleNotifierBase(ScribbleState state) : super(state);
@@ -57,7 +58,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
   ScribbleNotifier({
     /// If you pass a sketch here, the notifier will use that sketch as a
     /// starting point.
-    Sketch? sketch,
+    Layer? layer,
 
     /// Which pointers can be drawn with and are captured.
     ScribblePointerMode allowedPointersMode = ScribblePointerMode.all,
@@ -75,13 +76,15 @@ class ScribbleNotifier extends ScribbleNotifierBase
     this.pressureCurve = Curves.linear,
   }) : super(
           ScribbleState.drawing(
-            sketch: sketch ?? const Sketch(lines: []),
+            layer: layer ?? const Layer(sketches: []),
+            selectedSketchIndex: null,
             selectedWidth: widths[0],
             allowedPointersMode: allowedPointersMode,
           ),
         ) {
     state = ScribbleState.drawing(
-      sketch: sketch ?? const Sketch(lines: []),
+      layer: layer ?? const Layer(sketches: []),
+      selectedSketchIndex: null,
       selectedWidth: widths[0],
       allowedPointersMode: allowedPointersMode,
     );
@@ -100,7 +103,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
   ///
   /// If you want to store it somewhere you can call ``.toJson()`` on it to
   /// receive a map.
-  Sketch get currentSketch => state.sketch;
+  Sketch get currentSketch => state.settledSketch;
 
   final GlobalKey _repaintBoundaryKey = GlobalKey();
 
@@ -113,7 +116,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
   ScribbleState transformHistoryState(
       ScribbleState historyState, ScribbleState currentState) {
     return currentState.copyWith(
-      sketch: historyState.sketch,
+      layer: historyState.layer,
     );
   }
 
@@ -122,9 +125,9 @@ class ScribbleNotifier extends ScribbleNotifierBase
   ///
   /// Per default, this state of the sketch gets added to the undo history. If
   /// this is not desired, set [addToUndoHistory] to ``false``.
-  void setSketch({required Sketch sketch, bool addToUndoHistory = true}) {
+  void setLayer({required Layer layer, bool addToUndoHistory = true}) {
     final newState = state.copyWith(
-      sketch: sketch,
+      layer: layer,
     );
     if (addToUndoHistory) {
       state = newState;
@@ -133,11 +136,24 @@ class ScribbleNotifier extends ScribbleNotifierBase
     }
   }
 
+  void addLayer() {
+    state = state.copyWith.layer(
+      sketches: [...state.layer.sketches, const Sketch(lines: [])],
+    );
+  }
+
+  void selectSketch(int sketchIndex) {
+    if (0 <= sketchIndex && sketchIndex < state.layer.sketches.length) {
+      state = state.copyWith(selectedSketchIndex: sketchIndex);
+    }
+  }
+
   /// Clear the entire drawing.
   void clear() {
     state = state.map(
       drawing: (s) => ScribbleState.drawing(
-        sketch: const Sketch(lines: []),
+        layer: s.layer,
+        selectedSketchIndex: s.selectedSketchIndex,
         selectedColor: s.selectedColor,
         selectedWidth: s.selectedWidth,
         allowedPointersMode: s.allowedPointersMode,
@@ -146,7 +162,8 @@ class ScribbleNotifier extends ScribbleNotifierBase
         pointerPosition: s.pointerPosition,
       ),
       erasing: (s) => ScribbleState.erasing(
-        sketch: const Sketch(lines: []),
+        layer: s.layer,
+        selectedSketchIndex: s.selectedSketchIndex,
         selectedWidth: s.selectedWidth,
         allowedPointersMode: s.allowedPointersMode,
         activePointerIds: s.activePointerIds,
@@ -166,7 +183,8 @@ class ScribbleNotifier extends ScribbleNotifierBase
   /// Switches to eraser mode
   void setEraser() {
     temporaryState = ScribbleState.erasing(
-      sketch: state.sketch,
+      layer: state.layer,
+      selectedSketchIndex: state.selectedSketchIndex,
       selectedWidth: state.selectedWidth,
       scaleFactor: state.scaleFactor,
       allowedPointersMode: state.allowedPointersMode,
@@ -196,13 +214,15 @@ class ScribbleNotifier extends ScribbleNotifierBase
   void setColor(Color color) {
     temporaryState = state.map(
       drawing: (s) => ScribbleState.drawing(
-        sketch: s.sketch,
+        layer: s.layer,
+        selectedSketchIndex: s.selectedSketchIndex,
         selectedColor: color.value,
         selectedWidth: s.selectedWidth,
         allowedPointersMode: s.allowedPointersMode,
       ),
       erasing: (s) => ScribbleState.drawing(
-        sketch: s.sketch,
+        layer: s.layer,
+        selectedSketchIndex: s.selectedSketchIndex,
         selectedColor: color.value,
         selectedWidth: s.selectedWidth,
         allowedPointersMode: s.allowedPointersMode,
@@ -227,6 +247,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
   void onPointerDown(PointerDownEvent event) {
     if (!state.supportedPointerKinds.contains(event.kind)) return;
     ScribbleState s = state;
+    if (s.sketch == null) return;
 
     // Are there already pointers on the screen?
     if (state.activePointerIds.isNotEmpty) {
@@ -257,6 +278,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
   /// Used by the Listener callback to update the drawing
   @override
   void onPointerUpdate(PointerMoveEvent event) {
+    if (state.sketch == null) return;
     if (!state.supportedPointerKinds.contains(event.kind)) return;
     if (!state.active) {
       temporaryState = state.copyWith(
@@ -299,6 +321,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
   /// Used by the Listener callback to stop displaying the cursor
   @override
   void onPointerCancel(PointerCancelEvent event) {
+    if (state.sketch == null) return;
     if (!state.supportedPointerKinds.contains(event.kind)) return;
     if (state is Drawing) {
       state = _finishLineForState(_addPoint(event, state)).copyWith(
@@ -317,6 +340,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
 
   @override
   void onPointerExit(PointerExitEvent event) {
+    if (state.sketch == null) return;
     if (!state.supportedPointerKinds.contains(event.kind)) return;
     temporaryState = _finishLineForState(state).copyWith(
       pointerPosition: null,
@@ -344,13 +368,25 @@ class ScribbleNotifier extends ScribbleNotifierBase
   }
 
   ScribbleState _erasePoint(PointerEvent event) {
-    return state.copyWith.sketch(
-      lines: state.sketch.lines
-          .where((l) => l.points.every((p) =>
-              (event.localPosition - p.asOffset).distance >
-              l.width + state.selectedWidth))
-          .toList(),
-    );
+    var sketchLines = state.sketch?.lines
+        .where((l) => l.points.every((p) =>
+            (event.localPosition - p.asOffset).distance >
+            l.width + state.selectedWidth))
+        .toList();
+
+    if (sketchLines != null) {
+      return state.copyWith.layer(sketches: [
+        for (var i = 0; i < (state.selectedSketchIndex ?? 0); i++)
+          state.layer.sketches[i],
+        Sketch(lines: sketchLines),
+        for (var i = (state.selectedSketchIndex ?? 0) + 1;
+            i < state.layer.sketches.length;
+            i++)
+          state.layer.sketches[i],
+      ]);
+    }
+
+    return state;
   }
 
   /// Converts a pointer event to the [Point] on the canvas.
@@ -370,11 +406,25 @@ class ScribbleNotifier extends ScribbleNotifierBase
     if (s is Erasing || (s as Drawing).activeLine == null) {
       return s;
     }
+
+    var sketch = s.sketch;
+    if (sketch == null) {
+      return s;
+    }
+
+    var sketchLines = [...sketch.lines, s.activeLine!];
+
     return s.copyWith(
       activeLine: null,
-      sketch: s.sketch.copyWith(
-        lines: [...s.sketch.lines, s.activeLine!],
-      ),
+      layer: Layer(sketches: [
+        for (var i = 0; i < (state.selectedSketchIndex ?? 0); i++)
+          state.layer.sketches[i],
+        Sketch(lines: sketchLines),
+        for (var i = (state.selectedSketchIndex ?? 0) + 1;
+            i < state.layer.sketches.length;
+            i++)
+          state.layer.sketches[i],
+      ]),
     );
   }
 }
